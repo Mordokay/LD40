@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
 
-    public float playerSpeed;
     public LayerMask mouseShootLayerMask;
     public float bulletForce;
     public float bulletTimeOfLife;
@@ -18,6 +17,18 @@ public class PlayerController : MonoBehaviour {
 
     private void Start()
     {
+        if (!PlayerPrefs.HasKey("CheckpointX"))
+        {
+            PlayerPrefs.SetFloat("CheckpointX", 0.0f);
+        }
+        if (!PlayerPrefs.HasKey("CheckpointY"))
+        {
+            PlayerPrefs.SetFloat("CheckpointY", 0.0f);
+        }
+
+        this.transform.position = 
+            new Vector3(PlayerPrefs.GetFloat("CheckpointX"), PlayerPrefs.GetFloat("CheckpointY"), 0.0f);
+
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         canJump = false;
         timeSinceLastJump = 0.0f;

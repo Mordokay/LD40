@@ -9,6 +9,8 @@ TagManager:
   - Platform
   - HomeTab
   - PopupHolder
+  - Weight
+  - CannonBullet
   layers:
   - Default
   - TransparentFX
@@ -22,9 +24,9 @@ TagManager:
   - Backround
   - Popup
   - Bullet
-  - 
-  - 
-  - 
+  - Window
+  - CannonBullet
+  - Cannon
   - 
   - 
   - 
