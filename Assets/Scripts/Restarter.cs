@@ -9,7 +9,7 @@ public class Restarter : MonoBehaviour {
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         if(this.gameObject.tag.Equals("Weight") && collision.gameObject.tag.Equals("Platform"))
         {
