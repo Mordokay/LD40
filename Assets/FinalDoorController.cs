@@ -31,13 +31,14 @@ public class FinalDoorController : MonoBehaviour {
             }
             if(totalCount == 9)
             {
-                Debug.Log("Player won the game!!!!");
+                //Debug.Log("Player won the game!!!!");
+                uiManager.ResetData();
                 winPanel.SetActive(true);
                 gameHolder.SetActive(false);
             }
             else
             {
-                Debug.Log("Only got " + totalCount + " stars!!!");
+                //Debug.Log("Only got " + totalCount + " stars!!!");
             }
         }
     }
