@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4892079797632928}
   - component: {fileID: 212938532295834280}
   - component: {fileID: 50937500055131490}
-  m_Layer: 0
+  - component: {fileID: 58929530834875486}
+  m_Layer: 15
   m_Name: Cloud3
-  m_TagString: Untagged
+  m_TagString: Cloud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +92,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58929530834875486
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465179747975426}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.84
 --- !u!212 &212233201829748786
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -11,6 +11,7 @@ public class TabManager : MonoBehaviour {
     public int openedTabsCount;
     public bool homeTabSelected = true;
     GameObject popupCanvasHolder;
+    public GameObject TheActualGame;
 
     void Start () {
         popupCanvasHolder = GameObject.FindGameObjectWithTag("PopupHolder");
@@ -20,12 +21,24 @@ public class TabManager : MonoBehaviour {
 
     public void instantiateTab(GameObject windowObject)
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         openedTabsCount += 1;
         tabs[openedTabsCount].SetActive(true);
         GameObject myWindow = Instantiate(windowObject, WindowHolder.transform);
+        myWindow.SetActive(false);
         tabs[openedTabsCount].GetComponent<TabElement>().openedWindow = myWindow;
-        SelectTab(openedTabsCount - 1);
+        //SelectTab(openedTabsCount - 1);
+
+        if (windowObject.GetComponent<TabWindowController>().isFlickering)
+        {
+            tabs[openedTabsCount].GetComponent<TabElement>().isFlickeringBackround = true;
+            tabs[openedTabsCount].GetComponent<TabElement>().timeSinceLastFlicker = 0.0f;
+            tabs[openedTabsCount].GetComponent<TabElement>().backroundBrowser = GameObject.FindGameObjectWithTag("BrowserBackround");
+        }
+        if (windowObject.GetComponent<TabWindowController>().areYouSure)
+        {
+            tabs[openedTabsCount].GetComponent<TabElement>().hasConfirmationPanel = true;
+        }
     }
 
     public void CloseTab(int index)
@@ -41,12 +54,20 @@ public class TabManager : MonoBehaviour {
         }
         tabs[tabs.Count - 1].GetComponent<TabElement>().openedWindow = null;
         tabs[openedTabsCount].SetActive(false);
+
+        if (tabs[openedTabsCount].GetComponent<TabElement>().isFlickeringBackround)
+        {
+            tabs[openedTabsCount].GetComponent<TabElement>().isFlickeringBackround = false;
+            tabs[openedTabsCount].GetComponent<TabElement>().timeSinceLastFlicker = 0.0f;
+
+            tabs[openedTabsCount].GetComponent<TabElement>().backroundBrowser.GetComponent<Image>().color =
+                new Color(0.86f, 0.86f, 0.86f, 1);
+        }
+        if (tabs[openedTabsCount].GetComponent<TabElement>().hasConfirmationPanel)
+        {
+            tabs[openedTabsCount].GetComponent<TabElement>().hasConfirmationPanel = false;
+        }
         openedTabsCount -= 1;
-
-        //Debug.Log("Closing Tab " + index);
-
-        //If I close the selected tab and its not the last one
-
 
         if (!HomeTab.GetComponent<TabElement>().isSelected)
         {
@@ -66,6 +87,7 @@ public class TabManager : MonoBehaviour {
                 {
                     SelectTab(-1);
                     homeTabSelected = true;
+                    TheActualGame.SetActive(true);
                 }
             }
             else if (index < openedTabsCount)
@@ -108,18 +130,24 @@ public class TabManager : MonoBehaviour {
             HomeTab.transform.GetChild(0).GetComponent<Image>().color = Color.white;
             HomeTab.GetComponent<TabElement>().isSelected = true;
             homeTabSelected = true;
+            TheActualGame.SetActive(true);
             popupCanvasHolder.SetActive(true);
         }
         else
         {
             popupCanvasHolder.SetActive(false);
             homeTabSelected = false;
+            TheActualGame.SetActive(false);
             //Debug.Log("Selecting Tab " + index);
             WindowHolder.transform.GetChild(index).gameObject.SetActive(true);
             foreach (GameObject tab in tabs)
             {
                 tab.transform.GetChild(0).GetComponent<Image>().color = new Color(0.8f, 0.8f, 0.8f);
                 tab.GetComponent<TabElement>().isSelected = false;
+                if (tab.GetComponent<TabElement>().index != -1)
+                {
+                    tab.GetComponent<TabElement>().confirmationPanel.SetActive(false);
+                }
             }
             tabs[index + 1].transform.GetChild(0).GetComponent<Image>().color = Color.white;
             tabs[index + 1].GetComponent<TabElement>().isSelected = true;

@@ -16,8 +16,13 @@ public class PopupManager : MonoBehaviour {
     public int counterDownClick;
     public Text counterText;
 
+    public bool isWizard;
+    public List<GameObject> closeButtonList;
+    int totalActivated;
+    
     private void Start()
     {
+        totalActivated = 0;
         if (isIncrement)
         {
             counterDownClick = Random.Range(10, 20);
@@ -26,11 +31,34 @@ public class PopupManager : MonoBehaviour {
         timeSinceSwitch = 0.0f;
         popupCanvasHolder = GameObject.FindGameObjectWithTag("PopupHolder");;
         Popups = Resources.LoadAll<GameObject>("Popups");
+
+        if (isWizard)
+        {
+            bool atLeastOneActivated = false;
+
+            foreach(GameObject closeButton in closeButtonList)
+            {
+                if(Random.Range(0, 3) == 0)
+                {
+                    atLeastOneActivated = true;
+                    closeButton.SetActive(true);
+                    totalActivated += 1;
+                }
+                else
+                {
+                    closeButton.SetActive(false);
+                }
+            }
+            if (!atLeastOneActivated)
+            {
+                closeButtonList[Random.Range(0, closeButtonList.Count)].SetActive(true);
+            }
+        }
     }
 
     public void DecrementCounter()
     {
-        Debug.Log("Decrement counter");
+        //Debug.Log("Decrement counter");
         counterDownClick -= 1;
         if(counterDownClick == 0)
         {
@@ -54,9 +82,21 @@ public class PopupManager : MonoBehaviour {
         }
     }
 
+    public void closeWizardPopup(int index)
+    {
+        totalActivated -= 1;
+        GameObject wizardSound = Instantiate(Resources.Load<GameObject>("WizardSound"));
+        Destroy(wizardSound, 4.0f);
+        closeButtonList[index].SetActive(false);
+        if (totalActivated == 0)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+    }
+
     public void ClosePopup()
     {
-        Debug.Log("Closing plopup!!!");
+        //Debug.Log("Closing plopup!!!");
         Destroy(transform.parent.gameObject);
     }
 

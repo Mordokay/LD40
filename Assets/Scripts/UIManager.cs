@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
@@ -10,6 +11,27 @@ public class UIManager : MonoBehaviour {
     public GameObject lavaLampPanel;
     public GameObject lavaLampPanel2;
     public GameObject lavaLampPanel3;
+
+    public List<GameObject> starsUI;
+    public Sprite starFilled;
+    public List<bool> activatedStars;
+
+    public Text muteButtonText;
+    public GameObject Soundtrack;
+
+    public void Start()
+    {
+        if (activatedStars.Count == 0)
+        {
+            activatedStars = new List<bool>();
+            
+            for (int i = 0; i < starsUI.Count; i++)
+            {
+                activatedStars.Add(false);
+            }
+            
+        }
+    }
 
     public void LoadScene(int index)
     {
@@ -67,10 +89,41 @@ public class UIManager : MonoBehaviour {
         Application.Quit();
     }
 
-    public void ResetCheckpointPos()
+    public void ActivateStar(int index)
+    {
+        starsUI[index].GetComponent<Image>().sprite = starFilled;
+        activatedStars[index] = true;
+    }
+
+    public void ToggleMute()
+    {
+        if (Soundtrack.activeSelf)
+        {
+            Soundtrack.SetActive(false);
+            //AudioListener.volume = 1.0f;
+            muteButtonText.text = "Unmute";
+        }
+        else
+        {
+            Soundtrack.SetActive(true);
+            //AudioListener.volume = 0.0f;
+            muteButtonText.text = "Mute";
+        }
+    }
+
+    public void ResetData()
     {
         PlayerPrefs.SetFloat("CheckpointX", 0.0f);
         PlayerPrefs.SetFloat("CheckpointY", 0.0f);
+        PlayerPrefs.SetInt("Star1", 0);
+        PlayerPrefs.SetInt("Star2", 0);
+        PlayerPrefs.SetInt("Star3", 0);
+        PlayerPrefs.SetInt("Star4", 0);
+        PlayerPrefs.SetInt("Star5", 0);
+        PlayerPrefs.SetInt("Star6", 0);
+        PlayerPrefs.SetInt("Star7", 0);
+        PlayerPrefs.SetInt("Star8", 0);
+        PlayerPrefs.SetInt("Star9", 0);
     }
 
     void Update () {

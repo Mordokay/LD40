@@ -17,6 +17,8 @@ public class EventController : MonoBehaviour {
     public int probabilityPopupMin;
     public int probabilityPopupMax;
 
+    public float intervalBetweenEvents;
+
     private void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -51,7 +53,7 @@ public class EventController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Time.timeSinceLevelLoad - timeSinceLastTrigger > 2.0f)
+        if (Time.timeSinceLevelLoad - timeSinceLastTrigger > intervalBetweenEvents)
         {
             if (collision.gameObject.tag.Equals("Player"))
             {

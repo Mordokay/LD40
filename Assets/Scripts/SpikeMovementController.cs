@@ -5,33 +5,62 @@ using UnityEngine;
 public class SpikeMovementController : MonoBehaviour {
 
     public float shift;
-    public bool goingLeft;
     float originalX;
+    float originalY;
     public float spikeSpeed;
     GameObject canvas;
 
-	void Start () {
+    public bool isVertical;
+    public bool goingLeft;
+    public bool goingUp;
+
+    void Start () {
         originalX = this.transform.position.x;
+        originalY = this.transform.position.y;
         canvas = GameObject.FindGameObjectWithTag("Canvas");
     }
 	
 	void Update () {
         if (canvas.GetComponent<TabManager>().homeTabSelected)
         {
-            if (goingLeft)
+            if (isVertical)
             {
-                this.transform.Translate(-Vector3.right * Time.deltaTime * spikeSpeed);
-                if ((originalX - this.transform.position.x) > shift)
+                if (goingUp)
                 {
-                    goingLeft = false;
+                    this.transform.Translate(Vector3.up * Time.deltaTime * spikeSpeed);
+                    //Debug.Log("Go Up");
+                    if ((this.transform.localPosition.y - originalY) > shift)
+                    {
+                        goingUp = false;
+                    }
+                }
+                else
+                {
+                    this.transform.Translate(-Vector3.up * Time.deltaTime * spikeSpeed);
+                    //Debug.Log("Go Down");
+                    if ((originalY - this.transform.position.y) > shift)
+                    {
+                        goingUp = true;
+                    }
                 }
             }
             else
             {
-                this.transform.Translate(Vector3.right * Time.deltaTime * spikeSpeed);
-                if ((this.transform.position.x - originalX) > shift)
+                if (goingLeft)
                 {
-                    goingLeft = true;
+                    this.transform.Translate(-Vector3.right * Time.deltaTime * spikeSpeed);
+                    if ((originalX - this.transform.position.x) > shift)
+                    {
+                        goingLeft = false;
+                    }
+                }
+                else
+                {
+                    this.transform.Translate(Vector3.right * Time.deltaTime * spikeSpeed);
+                    if ((this.transform.position.x - originalX) > shift)
+                    {
+                        goingLeft = true;
+                    }
                 }
             }
         }

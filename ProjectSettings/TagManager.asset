@@ -11,6 +11,16 @@ TagManager:
   - PopupHolder
   - Weight
   - CannonBullet
+  - Cloud
+  - CannonDriver
+  - Spike
+  - Breakable
+  - PlayerBullet
+  - BrowserBackround
+  - Checkpoint
+  - PointyBallBox
+  - PointyBall
+  - CloudKiller
   layers:
   - Default
   - TransparentFX
@@ -27,14 +37,14 @@ TagManager:
   - Window
   - CannonBullet
   - Cannon
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Cloud
+  - Checkpoint
+  - Weight
+  - PointyBallBox
+  - PointyBall
+  - Platform
+  - Spikes
+  - Breakable
   - 
   - 
   - 
