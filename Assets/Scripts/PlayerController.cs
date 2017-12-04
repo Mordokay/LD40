@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour {
     public bool isOnBullet;
 
     public bool doubleJumpActivated;
+
+    public GameObject Soundtrack;
+    public Text muteButtonText;
 
     GameObject canvas;
 
@@ -47,6 +51,8 @@ public class PlayerController : MonoBehaviour {
         if (!PlayerPrefs.HasKey("Star8")) { PlayerPrefs.SetInt("Star8", 0); }
         if (!PlayerPrefs.HasKey("Star9")) { PlayerPrefs.SetInt("Star9", 0); }
 
+        if (!PlayerPrefs.HasKey("Mute")) { PlayerPrefs.SetInt("Mute", 0); }
+        
         this.transform.position = 
             new Vector3(PlayerPrefs.GetFloat("CheckpointX"), PlayerPrefs.GetFloat("CheckpointY"), 0.0f);
 
@@ -54,6 +60,12 @@ public class PlayerController : MonoBehaviour {
         canJump = false;
         timeSinceLastJump = 0.0f;
 
+        if(PlayerPrefs.GetInt("Mute") == 1)
+        {
+            Soundtrack.SetActive(false);
+            muteButtonText.text = "Unmute";
+        }
+        
         InitializeStars();
     }
 
@@ -120,13 +132,17 @@ public class PlayerController : MonoBehaviour {
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag.Equals("Platform") || collision.gameObject.tag.Equals("Breakable") ||
-            collision.gameObject.tag.Equals("PointyBallBox") || collision.gameObject.tag.Equals("Cannon"))
+            collision.gameObject.tag.Equals("PointyBallBox") || collision.gameObject.tag.Equals("Cannon") ||
+            collision.gameObject.tag.Equals("Cannon"))
         {
             canJump = true;
             doubleJumpActivated = false;
         }    
         else if (collision.gameObject.tag.Equals("CannonDriver"))
         {
+            canJump = true;
+            doubleJumpActivated = false;
+
             isOnBullet = true;
             this.GetComponent<Rigidbody2D>().gravityScale = 0;
             bulletBase = collision.gameObject;

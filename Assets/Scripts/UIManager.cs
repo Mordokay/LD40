@@ -91,7 +91,7 @@ public class UIManager : MonoBehaviour {
 
     public void ActivateStar(int index)
     {
-        starsUI[index].GetComponent<Image>().sprite = starFilled;
+        starsUI[index].GetComponent<Image>().color = Color.yellow;
         activatedStars[index] = true;
     }
 
@@ -99,12 +99,14 @@ public class UIManager : MonoBehaviour {
     {
         if (Soundtrack.activeSelf)
         {
+            PlayerPrefs.SetInt("Mute", 1);
             Soundtrack.SetActive(false);
             //AudioListener.volume = 1.0f;
             muteButtonText.text = "Unmute";
         }
         else
         {
+            PlayerPrefs.SetInt("Mute", 0);
             Soundtrack.SetActive(true);
             //AudioListener.volume = 0.0f;
             muteButtonText.text = "Mute";

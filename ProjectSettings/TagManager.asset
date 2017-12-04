@@ -21,6 +21,7 @@ TagManager:
   - PointyBallBox
   - PointyBall
   - CloudKiller
+  - Cannon
   layers:
   - Default
   - TransparentFX

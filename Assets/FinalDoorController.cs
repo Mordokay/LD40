@@ -26,7 +26,7 @@ public class FinalDoorController : MonoBehaviour {
                 if (uiManager.activatedStars[i])
                 {
                     totalCount += 1;
-                    AllStars[i].GetComponent<SpriteRenderer>().sprite = GoldStar;
+                    AllStars[i].GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
             }
             if(totalCount == 9)
