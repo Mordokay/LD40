@@ -6027,6 +6027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221621287}
   - component: {fileID: 221621286}
+  - component: {fileID: 221621290}
   - component: {fileID: 221621285}
   - component: {fileID: 221621284}
   - component: {fileID: 221621288}
@@ -6084,7 +6085,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1298296481}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6186,6 +6187,17 @@ MonoBehaviour:
   activatedStars: 
   muteButtonText: {fileID: 106217797}
   Soundtrack: {fileID: 1733691478}
+--- !u!114 &221621290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 221621283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326c3655aefae2f4e941c6d28d5ab7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &223238088
 GameObject:
   m_ObjectHideFlags: 0
@@ -35614,6 +35626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1214398104}
   - component: {fileID: 1214398107}
+  - component: {fileID: 1214398108}
   - component: {fileID: 1214398106}
   - component: {fileID: 1214398105}
   m_Layer: 0
@@ -35698,6 +35711,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 6
   m_TargetDisplay: 0
+--- !u!114 &1214398108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1214398103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326c3655aefae2f4e941c6d28d5ab7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1215256703
 GameObject:
   m_ObjectHideFlags: 0
@@ -38366,7 +38390,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10

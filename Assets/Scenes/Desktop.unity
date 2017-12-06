@@ -1780,6 +1780,7 @@ GameObject:
   - component: {fileID: 1260146569}
   - component: {fileID: 1260146568}
   - component: {fileID: 1260146571}
+  - component: {fileID: 1260146572}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -1861,7 +1862,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1848174478}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1888,6 +1889,22 @@ MonoBehaviour:
   lavaLampPanel: {fileID: 678929}
   lavaLampPanel2: {fileID: 2090532599}
   lavaLampPanel3: {fileID: 1015216325}
+  starsUI: []
+  starFilled: {fileID: 0}
+  activatedStars: 
+  muteButtonText: {fileID: 0}
+  Soundtrack: {fileID: 0}
+--- !u!114 &1260146572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1260146566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326c3655aefae2f4e941c6d28d5ab7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1261528387
 GameObject:
   m_ObjectHideFlags: 0
